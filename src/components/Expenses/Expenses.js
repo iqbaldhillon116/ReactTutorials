@@ -12,11 +12,29 @@ const Expenses = (props) => {
     setFilteredYear(selectedYear);
   };
 
+  const filteredExpenses = props.items.filter(expense => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+  let expenseContent = <p>no expenses found </p>;
+
+  if(filteredExpenses.length > 0){
+    expenseContent = filteredExpenses.map(expense =>
+      <ExpenseItem 
+      key={expense.id}
+      title={expense.title}
+      amount={expense.amount}
+      date={expense.date}/>
+    )
+  }
   return (
     <div>
       <Card className='expenses'>
         <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-        <ExpenseItem
+       {/* this is working like for loop for adding all components based on data that it is receiving */}
+        {expenseContent}
+
+        
+        {/* <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
           date={props.items[0].date}
@@ -35,7 +53,7 @@ const Expenses = (props) => {
           title={props.items[3].title}
           amount={props.items[3].amount}
           date={props.items[3].date}
-        />
+        /> */}
       </Card>
     </div>
   );
