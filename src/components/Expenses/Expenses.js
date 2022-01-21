@@ -18,6 +18,7 @@ const Expenses = (props) => {
   let expenseContent = <p>no expenses found </p>;
 
   if(filteredExpenses.length > 0){
+     {/* this is working like for loop for adding all components based on data that it is receiving */}
     expenseContent = filteredExpenses.map(expense =>
       <ExpenseItem 
       key={expense.id}
@@ -26,14 +27,14 @@ const Expenses = (props) => {
       date={expense.date}/>
     )
   }
+
   return (
     <div>
       <Card className='expenses'>
         <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-       {/* this is working like for loop for adding all components based on data that it is receiving */}
+       {/* conditional component */}
         {expenseContent}
 
-        
         {/* <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
